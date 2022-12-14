@@ -1,52 +1,61 @@
-import { useState, useEffect } from 'react'
-import { useFirestore } from '../../hooks/useFirestore'
-import { useAuthContext } from '../../hooks/useAuthContext'
-
+import { useState, useEffect } from "react";
+import { useFirestore } from "../../hooks/useFirestore";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 export default function TransactionForm({ uid, displayName }) {
-  const [name, setName] = useState('')
-  const [amount, setAmount] = useState('')
-  const { dispatch } = useAuthContext()
-  const { addDocument, response } = useFirestore('transactions')
-  const { bookslot } = useAuthContext()
-  const { user, inv, booked, inst, time } = useAuthContext()
+  const [name, setName] = useState("");
+  const [amount, setAmount] = useState("");
+  const [date, setDate] = useState("");
+
+  const { dispatch } = useAuthContext();
+  const { addDocument, response } = useFirestore("transactions");
+  const { DATE, booked, inst, time } = useAuthContext();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     addDocument({
       uid,
       name,
       amount,
-      displayName
-    })
+      displayName,
+      date,
+    });
 
-    dispatch({ type: 'inst', payload: "" })
-    dispatch({ type: 'time', payload: "" })
-    dispatch({ type: 'booked', payload: false })
-    dispatch({ type: 'bookslot', payload: true })
-  }
-
-  const handleChange = event => {
-    setName(event.target.value);
-    dispatch({ type: 'inst', payload: event.target.value })
+    dispatch({ type: "inst", payload: "" });
+    dispatch({ type: "time", payload: "" });
+    dispatch({ type: "booked", payload: false });
+    dispatch({ type: "DATE", payload: "" });
   };
 
-  const handleChange2 = event => {
+  const handleChange = (event) => {
+    setName(event.target.value);
+    dispatch({ type: "inst", payload: event.target.value });
+  };
+
+  const handleChange2 = (event) => {
     setAmount(event.target.value);
-    dispatch({ type: 'time', payload: event.target.value })
+    dispatch({ type: "time", payload: event.target.value });
+  };
+
+  const handleChange3 = (event) => {
+    setDate(event.target.value);
+    dispatch({ type: "DATE", payload: event.target.value });
   };
 
   useEffect(() => {
     if (response.success) {
-      setName("")
-      setAmount("")
+      setName("");
+      setAmount("");
+      setDate("");
     }
-  }, [response.success])
+  }, [response.success]);
+
   useEffect(() => {
-    setName(inst)
-    setAmount(time)
-  }, [inst, time])
+    setName(inst);
+    setAmount(time);
+    setDate(DATE);
+  }, [inst, time, DATE]);
 
   return (
     <>
@@ -61,6 +70,11 @@ export default function TransactionForm({ uid, displayName }) {
             <option value="Magnetic stirrers">Magnetic stirrers</option>
             <option value="Incubator">Incubator</option>
           </select>
+        </label>
+
+        <label>
+          <span>Date:</span>
+          <input type="date" required onChange={handleChange3} value={date} />
         </label>
 
         <label>
@@ -82,5 +96,5 @@ export default function TransactionForm({ uid, displayName }) {
         {!booked && <button>Book</button>}
       </form>
     </>
-  )
+  );
 }
