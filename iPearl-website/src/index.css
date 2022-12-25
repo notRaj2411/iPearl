@@ -33,6 +33,33 @@ ul {
   font-size: 1em;
 }
 
+.btn1 {
+  background: none;
+  border: 2px solid #1f9751;
+  padding: 6px 6px;
+  margin-left: 17px;
+  border-radius: 4px;
+  color: #1f9751;
+  font-weight: bold;
+
+  font-size: 1em;
+}
+
+.search {
+  background: none;
+
+  padding: 6px 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #1f9751;
+  font-weight: bold;
+
+  font-size: 1em;
+}
+
+
+
+
 .btn:hover {
   background: #1f9751;
   color: #fff;
@@ -44,11 +71,17 @@ ul {
   margin-inline: 1em;
   color: #1f9751;
 }
+
 .bookedBy {
   margin-left: auto;
   margin-right: 0;
 }
+
 .middle {
   margin-left: auto;
   margin-right: auto;
+}
+
+.mj {
+  color: #1f9751;
 }

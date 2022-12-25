@@ -10,9 +10,19 @@ import TransactionForm from "./TransactionForm";
 import TransactionList from "./TransactionList";
 import SampleList from "./SampleList";
 import TransactionListFiltered from "./TransactionListFiltered";
-
+import SampleListFiltered from "./SampleListfiltered"
+import SopList from "./SopList";
+import SopForm from "./SopForm";
+import ResourceForm from "./ResourceForm";
+import ResourceList from "./ResourceList";
 export default function Home() {
-  const { user, inv, inst, time, DATE } = useAuthContext();
+  const { user, inv, inst, time, DATE, search, sop, res } = useAuthContext();
+
+  const obj3 = useCollection("sop");
+  const sopdoc = obj3.documents;
+
+  const obj4 = useCollection("resource");
+  const resdoc = obj4.documents;
 
   const obj1 = useCollection(
     "transactions",
@@ -36,32 +46,53 @@ export default function Home() {
       <div className={styles.content}>
         {/* populates the user transacation list */}
         {error && <p>{error}</p>}
-        {!inst && !inv && user.displayName != "admin" && documents && (
+        {!res && !sop && !inst && !inv && user.displayName != "admin" && documents && (
           <TransactionList transactions={documents} />
         )}
-        {inst && !inv && user.displayName != "admin" && documents && (
+        {!res && !sop && inst && !inv && user.displayName != "admin" && documents && (
           <TransactionListFiltered temp={inst} clock={time} date={DATE} />
         )}
-        {inv && user.displayName != "admin" && sample && (
+        {!res && !sop && !search && inv && user.displayName != "admin" && sample && (
           <SampleList sample={sample} />
+        )}
+        {!res && !sop && search && inv && user.displayName != "admin" && sample && (
+          <SampleListFiltered sample={sample} search={search} />
+        )}
+        {!res && sop && user.displayName != "admin" && sopdoc && (
+          <SopList sample={sopdoc} />
+        )}
+        {res && !sop && user.displayName != "admin" && sopdoc && (
+          <ResourceList sample={resdoc} />
         )}
 
         {/* populates the admin sample list */}
         {error2 && <p>{error2}</p>}
-        {user.displayName === "admin" && sample && (
+        {!res && !sop && user.displayName === "admin" && sample && (
           <SampleList sample={sample} />
+        )}
+        {!res && sop && user.displayName === "admin" && sopdoc && (
+          <SopList sample={sopdoc} />
+        )}
+        {res && !sop && user.displayName === "admin" && sopdoc && (
+          <ResourceList sample={resdoc} />
         )}
       </div>
 
       <div className={styles.sidebar}>
         {/* populates sidebar */}
         {/* populates Transaction form for normal user */}
-        {!inv && user.displayName != "admin" && (
+        {!res && !sop && !inv && user.displayName != "admin" && (
           <TransactionForm uid={user.uid} displayName={user.displayName} />
         )}
         {/* populates INventory form for admin */}
-        {user.displayName === "admin" && (
+        {!res && !sop && user.displayName === "admin" && (
           <Inventoryform uid={user.uid} displayName={user.displayName} />
+        )}
+        {!res && sop && user.displayName === "admin" && (
+          <SopForm uid={user.uid} displayName={user.displayName} />
+        )}
+        {res && !sop && user.displayName === "admin" && (
+          <ResourceForm uid={user.uid} displayName={user.displayName} />
         )}
       </div>
     </div>

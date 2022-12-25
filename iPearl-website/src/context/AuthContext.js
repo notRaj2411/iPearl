@@ -21,6 +21,12 @@ export const authReducer = (state, action) => {
       return { ...state, booked: action.payload };
     case "DATE":
       return { ...state, DATE: action.payload };
+    case "search":
+      return { ...state, search: action.payload };
+    case "sop":
+      return { ...state, sop: action.payload };
+    case "res":
+      return { ...state, res: action.payload };
     default:
       return state;
   }
@@ -35,6 +41,9 @@ export const AuthContextProvider = ({ children }) => {
     time: null,
     booked: false,
     DATE: null,
+    search: null,
+    sop: false,
+    res: false
   });
 
   useEffect(() => {
