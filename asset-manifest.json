@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/iPearl/static/css/main.f72d219a.chunk.css",
-    "main.js": "/iPearl/static/js/main.43446824.chunk.js",
-    "main.js.map": "/iPearl/static/js/main.43446824.chunk.js.map",
+    "main.js": "/iPearl/static/js/main.7998600b.chunk.js",
+    "main.js.map": "/iPearl/static/js/main.7998600b.chunk.js.map",
     "runtime-main.js": "/iPearl/static/js/runtime-main.fdff97fd.js",
     "runtime-main.js.map": "/iPearl/static/js/runtime-main.fdff97fd.js.map",
     "static/js/2.5e29f74e.chunk.js": "/iPearl/static/js/2.5e29f74e.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.fdff97fd.js",
     "static/js/2.5e29f74e.chunk.js",
     "static/css/main.f72d219a.chunk.css",
-    "static/js/main.43446824.chunk.js"
+    "static/js/main.7998600b.chunk.js"
   ]
 }
