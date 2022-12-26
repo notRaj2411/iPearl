@@ -102,4 +102,10 @@
   line-height: 0;
   font-size: 0.9em;
   cursor: pointer;
+
+}
+
+.transactions button:hover {
+  background-color: #FF0101;
+  color: white;
 }

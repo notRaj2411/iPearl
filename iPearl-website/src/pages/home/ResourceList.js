@@ -1,9 +1,11 @@
 import styles from "./Home.module.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useFirestore } from "../../hooks/useFirestore";
 
 export default function ResourceList({ sample }) {
     let ans = 'hehe'
     let hyperlink = ''
+    const { deleteDocument } = useFirestore('resource')
     return (
         <>
             <h2 style={{ color: "green" }}>Resources</h2>
@@ -24,6 +26,7 @@ export default function ResourceList({ sample }) {
                         <p className={styles.name}> {transaction.name}</p>
                         {/* <p className={styles.amount}>{ans.link(transaction.url)}</p> */}
                         <a className={styles.amount} href={transaction.url}>{transaction.name}</a>
+                        <button onClick={() => deleteDocument(transaction.id)}>x</button>
                         <br />
                     </li>
                 ))}

@@ -1,15 +1,16 @@
 import styles from "./Home.module.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
-
+import { useFirestore } from "../../hooks/useFirestore";
 export default function SopList({ sample }) {
     let ans = 'hehe'
     let hyperlink = ''
+    const { deleteDocument } = useFirestore('sop')
     return (
         <>
             <h2 style={{ color: "green" }}>SOP</h2>
             <br />
             <div className="title">
-                <h4>Project Name</h4>
+                <h4>Procedure Name</h4>
                 <h4>Link</h4>
 
             </div>
@@ -24,6 +25,7 @@ export default function SopList({ sample }) {
                         <p className={styles.name}> {transaction.name}</p>
                         {/* <p className={styles.amount}>{ans.link(transaction.url)}</p> */}
                         <a className={styles.amount} href={transaction.url}>{transaction.name}</a>
+                        <button onClick={() => deleteDocument(transaction.id)}>x</button>
                         <br />
                     </li>
                 ))}

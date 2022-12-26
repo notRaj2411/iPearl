@@ -20,10 +20,11 @@ export default function Signup() {
   return (
     <>
       <img src={logo} width="300" height="180" style={{ 'margin-left': '600px' }} />
+      <h1 style={{ color: '#1f9751', 'margin-left': '550px' }}>Lab Management System</h1>
       <form onSubmit={handleSubmit} className={styles['signup-form']}>
-        <h2>sign up</h2>
+        <h2>Sign Up</h2>
         <label>
-          <span>email:</span>
+          <span>Email:</span>
           <input
             type="email"
             onChange={(e) => setEmail(e.target.value)}
@@ -31,7 +32,7 @@ export default function Signup() {
           />
         </label>
         <label>
-          <span>password:</span>
+          <span>Password:</span>
           <input
             type="password"
             onChange={(e) => setPassword(e.target.value)}
@@ -39,14 +40,14 @@ export default function Signup() {
           />
         </label>
         <label>
-          <span>display name:</span>
+          <span>Username:</span>
           <input
             type="text"
             onChange={(e) => setDisplayName(e.target.value)}
             value={displayName}
           />
         </label>
-        {!isPending && <button className="btn">sign up</button>}
+        {!isPending && <button className="btn">Sign Up</button>}
         {isPending && <button className="btn" disabled>loading</button>}
         {error && <p>{error}</p>}
       </form>

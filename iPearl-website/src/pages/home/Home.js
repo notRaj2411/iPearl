@@ -67,8 +67,11 @@ export default function Home() {
 
         {/* populates the admin sample list */}
         {error2 && <p>{error2}</p>}
-        {!res && !sop && user.displayName === "admin" && sample && (
+        {!res && !sop && !search && user.displayName === "admin" && sample && (
           <SampleList sample={sample} />
+        )}
+        {!res && !sop && search && inv && user.displayName == "admin" && sample && (
+          <SampleListFiltered sample={sample} search={search} />
         )}
         {!res && sop && user.displayName === "admin" && sopdoc && (
           <SopList sample={sopdoc} />

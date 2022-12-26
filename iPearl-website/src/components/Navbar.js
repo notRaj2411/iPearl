@@ -40,6 +40,7 @@ export default function Navbar() {
   const handleInventory = () => {
     dispatch({ type: 'sop', payload: false })
     dispatch({ type: 'res', payload: false })
+    dispatch({ type: 'inv', payload: true })
 
 
   }
@@ -138,14 +139,26 @@ export default function Navbar() {
           <>
             <li>hello, {user.displayName}</li>
             <li>
-              <button className="btn" onClick={() => handleInventory()}>Inventory</button>
+              <button className="btn" onClick={() => handleClick()}>Inventory</button>
             </li>
             <li>
               <button className="btn" onClick={() => handleSop()}>SOP</button>
             </li>
+            {!sop && inv && (<>  <li>
+
+              <input type="text" value={searched} id="simple-search" class="btn1" placeholder="Search       " required onChange={handleSearchValue} />
+
+            </li>
+
+              <li>
+                <button className="search" onClick={() => handleSearch()}>🔍</button>
+              </li></>
+            )
+            }
             <li>
               <button className="btn" onClick={() => handleResource()}>Resource</button>
             </li>
+
             <li>
               <button className="btn" onClick={logout}>Logout</button>
             </li>

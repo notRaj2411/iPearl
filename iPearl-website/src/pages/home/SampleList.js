@@ -1,8 +1,11 @@
 import styles from "./Home.module.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useFirestore } from "../../hooks/useFirestore";
 
 export default function SampleList({ sample }) {
+  const { deleteDocument } = useFirestore('samples')
   return (
+
     <>
       <h2 style={{ color: "green" }}>Sample Inventory</h2>
       <br />
@@ -19,6 +22,7 @@ export default function SampleList({ sample }) {
             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
             <p className={styles.name}> {transaction.slot}</p>
             <p className={styles.amount}>{transaction.name}</p>
+            <button onClick={() => deleteDocument(transaction.id)}>x</button>
             <br />
           </li>
         ))}

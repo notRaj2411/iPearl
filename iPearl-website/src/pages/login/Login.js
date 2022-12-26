@@ -17,11 +17,13 @@ export default function Login() {
 
   return (
     <>
-      <img src={logo} width="300" height="180" style={{ 'margin-left': '600px' }} />
+      <img src={logo} width="300" height="180" style={{ 'margin-left': '600px', 'margin-top': '10px' }} />
+
+      <h1 style={{ color: '#1f9751', 'margin-left': '550px' }}>Lab Management System</h1>
       <form onSubmit={handleSubmit} className={styles['login-form']}>
-        <h2>login </h2>
+        <h2>Login </h2>
         <label>
-          <span>email:</span>
+          <span>Email:</span>
           <input
             type="email"
             onChange={(e) => setEmail(e.target.value)}
@@ -29,7 +31,7 @@ export default function Login() {
           />
         </label>
         <label>
-          <span>password:</span>
+          <span>Password:</span>
           <input
             type="password"
             onChange={(e) => setPassword(e.target.value)}
