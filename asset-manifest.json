@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/iPearl/static/css/main.f72d219a.chunk.css",
+    "main.js": "/iPearl/static/js/main.43446824.chunk.js",
+    "main.js.map": "/iPearl/static/js/main.43446824.chunk.js.map",
+    "runtime-main.js": "/iPearl/static/js/runtime-main.fdff97fd.js",
+    "runtime-main.js.map": "/iPearl/static/js/runtime-main.fdff97fd.js.map",
+    "static/js/2.5e29f74e.chunk.js": "/iPearl/static/js/2.5e29f74e.chunk.js",
+    "static/js/2.5e29f74e.chunk.js.map": "/iPearl/static/js/2.5e29f74e.chunk.js.map",
+    "index.html": "/iPearl/index.html",
+    "static/css/main.f72d219a.chunk.css.map": "/iPearl/static/css/main.f72d219a.chunk.css.map",
+    "static/js/2.5e29f74e.chunk.js.LICENSE.txt": "/iPearl/static/js/2.5e29f74e.chunk.js.LICENSE.txt",
+    "static/media/logo.431d2332.png": "/iPearl/static/media/logo.431d2332.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fdff97fd.js",
+    "static/js/2.5e29f74e.chunk.js",
+    "static/css/main.f72d219a.chunk.css",
+    "static/js/main.43446824.chunk.js"
+  ]
+}
