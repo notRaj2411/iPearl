@@ -2,7 +2,7 @@
   "name": "my-money",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://notRaj2411.github.io/iPearl",
+  "homepage": "http://notRaj2411.github.io/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
