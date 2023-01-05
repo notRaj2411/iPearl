@@ -65,10 +65,22 @@ export default function TransactionForm({ uid, displayName }) {
           <span>Equipment name:</span>
           <select value={name} required onChange={handleChange}>
             <option value="">--Choose the equipment--</option>
-            <option value="Microscope">Microscope</option>
-            <option value="Autoclave Machine">Autoclave Machine</option>
-            <option value="Magnetic stirrers">Magnetic stirrers</option>
-            <option value="Incubator">Incubator</option>
+            <option value="Cell Culture L1: Biosafety Cabinet, Host">Cell Culture L1: Biosafety Cabinet, Host</option>
+            <option value="Cell Culture L2: Biosafety Cabinet, Parasite">Cell Culture L2: Biosafety Cabinet, Parasite</option>
+            <option value="Cell Culture R1: Biosafety Cabinet Host and Parasite">Cell Culture R1: Biosafety Cabinet Host and Parasite</option>
+            <option value="Bacterial Culture: Biosafety Cabinet">Bacterial Culture: Biosafety Cabinet</option>
+            <option value="Zeiss Microscope">Zeiss Microscope</option>
+            <option value="Spectramax iD5">Spectramax iD5</option>
+            <option value="Veriti PCR">Veriti PCR</option>
+            <option value="Proflex PCR Block1">Proflex PCR Block1</option>
+            <option value="Proflex PCR Block2">Proflex PCR Block2</option>
+            <option value="Proflex PCR Block3">Proflex PCR Block3</option>
+            <option value="SDS PAGE Equipment">SDS PAGE Equipment</option>
+            <option value="Bacterial Centrifuge">Bacterial Centrifuge</option>
+            <option value="Common Computer-Scholar's Room">Common Computer-Scholar's Room</option>
+            <option value="">Incubator</option>
+            <option value="IXCM Confocal">IXCM Confocal</option>
+
           </select>
         </label>
 

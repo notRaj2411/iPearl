@@ -6,6 +6,7 @@ export default function ResourceList({ sample }) {
     let ans = 'hehe'
     let hyperlink = ''
     const { deleteDocument } = useFirestore('resource')
+    const { user, res } = useAuthContext()
     return (
         <>
             <h2 style={{ color: "green" }}>Resources</h2>
@@ -17,16 +18,16 @@ export default function ResourceList({ sample }) {
             </div>
 
             <ul className={styles.transactions}>
-                {sample.map((transaction) => (
+                {sample.map((transaction, idx) => (
 
                     <li key={transaction.id}>
 
-
+                        <span className={styles.spacing} >{idx + 1 + '.'}</span>
                         {/* {ans = (hyperlink.link({ transaction.url }))} */}
                         <p className={styles.name}> {transaction.name}</p>
                         {/* <p className={styles.amount}>{ans.link(transaction.url)}</p> */}
                         <a className={styles.amount} href={transaction.url}>{transaction.name}</a>
-                        <button onClick={() => deleteDocument(transaction.id)}>x</button>
+                        {user.displayName == 'admin' && (<button onClick={() => deleteDocument(transaction.id)}>x</button>)}
                         <br />
                     </li>
                 ))}

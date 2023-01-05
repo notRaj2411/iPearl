@@ -50,6 +50,11 @@
   width: 100%;
 }
 
+.spacing {
+  padding: 0 3.5% 0 0;
+  color: #555;
+}
+
 .sidebar h3 {
   color: #1f9751;
   margin-bottom: 20px;

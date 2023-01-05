@@ -2,8 +2,10 @@ import styles from "./Home.module.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useFirestore } from "../../hooks/useFirestore";
 
+
 export default function SampleList({ sample }) {
   const { deleteDocument } = useFirestore('samples')
+  const { user, res } = useAuthContext()
   return (
 
     <>
@@ -22,7 +24,8 @@ export default function SampleList({ sample }) {
             &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
             <p className={styles.name}> {transaction.slot}</p>
             <p className={styles.amount}>{transaction.name}</p>
-            <button onClick={() => deleteDocument(transaction.id)}>x</button>
+            {user.displayName == 'admin' && (<button onClick={() => deleteDocument(transaction.id)}>x</button>)}
+
             <br />
           </li>
         ))}
