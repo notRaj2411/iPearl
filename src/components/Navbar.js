@@ -10,13 +10,15 @@ import styles from './Navbar.module.css'
 
 export default function Navbar() {
   const { logout } = useLogout()
-  const { user, res, invtype } = useAuthContext()
+  const { user, res, invtype, restype } = useAuthContext()
   const { dispatch, sop } = useAuthContext()
   const { booked } = useAuthContext()
   const { inv } = useAuthContext()
   const { search } = useAuthContext()
   const [flag, setFlag] = useState(false);
   const [inventory, setInventory] = useState('');
+  const [resource, setResource] = useState('');
+
 
   const [searched, setSearched] = useState('')
   const handleClick = (e) => {
@@ -32,7 +34,7 @@ export default function Navbar() {
   }
   const handleSearch = () => {
     dispatch({ type: 'search', payload: searched })
-    //setSearched
+
     console.log(searched)
   }
   const handleSop = () => {
@@ -40,7 +42,7 @@ export default function Navbar() {
     dispatch({ type: 'INV', payload: false })
     dispatch({ type: 'search', payload: false })
     dispatch({ type: 'res', payload: false })
-    //setSearched
+
 
   }
   const handleInventory = () => {
@@ -68,14 +70,16 @@ export default function Navbar() {
 
   };
 
-  const handleResource = () => {
+  const handleResource = (e) => {
+    setResource(e.target.value);
     dispatch({ type: 'res', payload: true })
     dispatch({ type: 'sop', payload: false })
     dispatch({ type: 'INV', payload: false })
     dispatch({ type: 'search', payload: false })
+    dispatch({ type: 'restype', payload: e.target.value })
 
-    //setSearched
-    console.log(res)
+    console.log(restype)
+    //console.log(res)
   }
 
   useEffect(() => {
@@ -186,8 +190,20 @@ export default function Navbar() {
               </li></>
             )
             }
-            <li>
+            {/* <li>
               <button className="btn" onClick={() => handleResource()}>Resource</button>
+            </li> */}
+            <li>
+              <select className="btn1" value={resource} required onChange={handleResource}>
+                <option value="">--Resources--</option>
+                <option value="Chemicals">Chemicals</option>
+                <option value="Antibodies">Antibodies</option>
+                <option value="Inhibitors">Inhibitors</option>
+                <option value="PlasmidsMaps">Plasmids Maps</option>
+                <option value="Others">Others</option>
+
+
+              </select>
             </li>
 
             <li>

@@ -5,14 +5,47 @@ import { useFirestore } from "../../hooks/useFirestore";
 export default function ResourceList({ sample }) {
     let ans = 'hehe'
     let hyperlink = ''
-    const { deleteDocument } = useFirestore('resource')
-    const { user, res } = useAuthContext()
+    const obj1 = useFirestore('Chemicals')
+    const obj2 = useFirestore('Antibodies')
+    const obj3 = useFirestore('Inhibitors')
+    const obj4 = useFirestore('PlasmidsMaps')
+    const obj5 = useFirestore('Others')
+    const { user, res, restype } = useAuthContext()
+    let deleteDocument;
+    if (restype === 'Chemicals') {
+        deleteDocument = obj1.deleteDocument;
+    }
+    else if (restype === 'Antibodies') {
+        deleteDocument = obj2.deleteDocument;
+    }
+    else if (restype === 'Inhibitors') {
+        deleteDocument = obj3.deleteDocument;
+    }
+    else if (restype === 'PlasmidsMaps') {
+        deleteDocument = obj4.deleteDocument;
+    }
+    else if (restype === 'Others') {
+        deleteDocument = obj5.deleteDocument;
+    }
+
+
+
     return (
         <>
             <h2 style={{ color: "green" }}>Resources</h2>
             <br />
             <div className="title">
-                <h4>Resource Name</h4>
+
+                {restype === 'PlasmidsMaps' &&
+                    <h4>Plasmid Maps</h4>
+                }
+
+                {restype != 'PlasmidsMaps' &&
+                    <h4>{restype}</h4>
+                }
+
+
+
                 <h4>Link</h4>
 
             </div>

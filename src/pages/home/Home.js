@@ -16,13 +16,36 @@ import SopForm from "./SopForm";
 import ResourceForm from "./ResourceForm";
 import ResourceList from "./ResourceList";
 export default function Home() {
-  const { user, inv, inst, time, DATE, search, sop, res, invtype } = useAuthContext();
+  const { user, inv, inst, time, DATE, search, sop, res, invtype, restype } = useAuthContext();
 
   const obj3 = useCollection("sop");
   const sopdoc = obj3.documents;
 
-  const obj4 = useCollection("resource");
-  const resdoc = obj4.documents;
+  const Chemicals = useCollection("Chemicals");
+  const Antibodies = useCollection("Antibodies");
+  const Inhibitors = useCollection("Inhibitors");
+  const Plasmids = useCollection("PlasmidsMaps");
+  const Others = useCollection("Others");
+
+
+
+
+  let resdoc;
+  if (restype === 'Chemicals') { resdoc = Chemicals.documents; }
+  else if (restype === 'Antibodies') {
+    resdoc = Antibodies.documents;
+  }
+  else if (restype === 'Inhibitors') {
+    resdoc = Inhibitors.documents;
+  }
+  else if (restype === 'PlasmidsMaps') {
+    resdoc = Plasmids.documents;
+  }
+  else if (restype === 'Others') {
+    resdoc = Others.documents;
+  }
+
+
 
   const obj1 = useCollection(
     "transactions",
