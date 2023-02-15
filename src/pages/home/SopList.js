@@ -5,7 +5,8 @@ export default function SopList({ sample }) {
     let ans = 'hehe'
     let hyperlink = ''
     const { deleteDocument } = useFirestore('sop')
-    const { user, res } = useAuthContext()
+    const { user, res, sopsearch } = useAuthContext()
+    //const sopsearch = "hello"
 
     return (
         <>
@@ -18,7 +19,14 @@ export default function SopList({ sample }) {
             </div>
 
             <ul className={styles.transactions}>
-                {sample.map((transaction, idx) => (
+                {sample.filter((transaction) => {
+                    if (sopsearch === "") {
+                        return transaction
+                    }
+                    else if (transaction.name.toLowerCase().includes(sopsearch.toLowerCase())) {
+                        return transaction;
+                    }
+                }).map((transaction, idx) => (
 
                     <li key={transaction.id}>
                         <span className={styles.spacing} >{idx + 1 + '.'}</span>

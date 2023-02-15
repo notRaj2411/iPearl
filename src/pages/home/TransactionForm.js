@@ -78,7 +78,7 @@ export default function TransactionForm({ uid, displayName }) {
             <option value="SDS PAGE Equipment">SDS PAGE Equipment</option>
             <option value="Bacterial Centrifuge">Bacterial Centrifuge</option>
             <option value="Common Computer-Scholar's Room">Common Computer-Scholar's Room</option>
-            <option value="">Incubator</option>
+
             <option value="IXCM Confocal">IXCM Confocal</option>
 
           </select>

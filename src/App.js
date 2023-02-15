@@ -6,6 +6,7 @@ import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
 import Navbar from './components/Navbar'
+import ForgotPassword from './pages/forgotpassword/ForgotPassword'
 
 function App() {
   const { authIsReady, user } = useAuthContext()
@@ -27,6 +28,10 @@ function App() {
             <Route path="/signup">
               {user && user.displayName && <Redirect to="/" />}
               {!user && <Signup />}
+            </Route>
+            <Route exact path="/forgotpassword">
+              {!user && <ForgotPassword />}
+
             </Route>
 
           </Switch>

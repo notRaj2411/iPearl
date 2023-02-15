@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useLogin } from '../../hooks/useLogin'
 import logo from '../../components/logo.png';
+import { Link } from "react-router-dom"
 
 // styles
 import styles from './Login.module.css'
@@ -38,9 +39,23 @@ export default function Login() {
             value={password}
           />
         </label>
-        {!isPending && <button className="btn">Login</button>}
-        {isPending && <button className="btn" disabled>loading</button>}
-        {error && <p>{error}</p>}
+
+        <div>
+          {!isPending && <button className="btn">Login</button>}
+          {isPending && <button className="btn" disabled>loading</button>}
+          {error && <p>{error}</p>}
+        </div>
+
+
+        <br />
+        <p >
+          <Link style={{ color: 'green', fontSize: '15px' }} to="/forgotpassword">forgot password?</Link>
+
+        </p>
+
+
+
+
       </form>
     </>
 

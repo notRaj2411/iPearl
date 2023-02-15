@@ -15,8 +15,9 @@ import SopList from "./SopList";
 import SopForm from "./SopForm";
 import ResourceForm from "./ResourceForm";
 import ResourceList from "./ResourceList";
+import ManageUsers from "./ManageUsers";
 export default function Home() {
-  const { user, inv, inst, time, DATE, search, sop, res, invtype, restype } = useAuthContext();
+  const { user, inv, inst, time, DATE, search, sop, res, invtype, restype, manusers } = useAuthContext();
 
   const obj3 = useCollection("sop");
   const sopdoc = obj3.documents;
@@ -102,8 +103,9 @@ export default function Home() {
         {/* populates the user transacation list */}
         {error && <p>{error}</p>}
         {!res && !sop && !inst && !inv && user.displayName != "admin" && documents && (
-          <TransactionList transactions={documents} />
+          <TransactionList sample={documents} />
         )}
+
         {!res && !sop && inst && !inv && user.displayName != "admin" && documents && (
           <TransactionListFiltered temp={inst} clock={time} date={DATE} />
         )}
@@ -122,18 +124,25 @@ export default function Home() {
 
         {/* populates the admin sample list */}
         {error2 && <p>{error2}</p>}
-        {!res && !sop && !search && user.displayName === "admin" && sample && (
+
+
+        {!res && !sop && !search && user.displayName === "admin" && sample && !manusers && (
           <SampleList sample={sample} />
         )}
-        {!res && !sop && search && inv && user.displayName == "admin" && sample && (
+        {!res && !sop && search && inv && user.displayName === "admin" && sample && !manusers && (
           <SampleListFiltered sample={sample} search={search} />
         )}
-        {!res && sop && user.displayName === "admin" && sopdoc && (
+        {!res && sop && user.displayName === "admin" && sopdoc && !manusers && (
           <SopList sample={sopdoc} />
         )}
-        {res && !sop && user.displayName === "admin" && sopdoc && (
+        {res && !sop && user.displayName === "admin" && sopdoc && !manusers && (
           <ResourceList sample={resdoc} />
         )}
+
+        {!res && !sop && user.displayName === "admin" && manusers && (
+          <ManageUsers sample={sopdoc} />
+        )}
+
       </div>
 
       <div className={styles.sidebar}>
@@ -143,15 +152,16 @@ export default function Home() {
           <TransactionForm uid={user.uid} displayName={user.displayName} />
         )}
         {/* populates INventory form for admin */}
-        {!res && !sop && user.displayName === "admin" && (
+        {!res && !sop && user.displayName === "admin" && !manusers && (
           <Inventoryform uid={user.uid} displayName={user.displayName} />
         )}
-        {!res && sop && user.displayName === "admin" && (
+        {!res && sop && user.displayName === "admin" && !manusers && (
           <SopForm uid={user.uid} displayName={user.displayName} />
         )}
-        {res && !sop && user.displayName === "admin" && (
+        {res && !sop && user.displayName === "admin" && !manusers && (
           <ResourceForm uid={user.uid} displayName={user.displayName} />
         )}
+
       </div>
     </div>
   );

@@ -13,7 +13,14 @@ export default function SampleListfiltered({ sample, search }) {
             </div>
             {/* {console.log(search)} */}
             <ul className={styles.transactions}>
-                {sample.map((transaction) => transaction.name === search ? (
+                {sample.filter((transaction) => {
+                    if (search === "") {
+                        return transaction
+                    }
+                    else if (transaction.name.toLowerCase().includes(search.toLowerCase()) || transaction.boxno.toLowerCase().includes(search.toLowerCase())) {
+                        return transaction;
+                    }
+                }).map((transaction) => (
                     <li key={transaction.id}>
                         <p className={styles.name}> {transaction.boxno}</p>
                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -21,7 +28,7 @@ export default function SampleListfiltered({ sample, search }) {
                         <p className={styles.amount}>{transaction.name}</p>
                         <br />
                     </li>
-                ) : null)}
+                ))}
             </ul>
             {console.log(sample)}
         </>

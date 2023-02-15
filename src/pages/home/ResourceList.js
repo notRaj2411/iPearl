@@ -10,7 +10,7 @@ export default function ResourceList({ sample }) {
     const obj3 = useFirestore('Inhibitors')
     const obj4 = useFirestore('PlasmidsMaps')
     const obj5 = useFirestore('Others')
-    const { user, res, restype } = useAuthContext()
+    const { user, res, restype, ressearch } = useAuthContext()
     let deleteDocument;
     if (restype === 'Chemicals') {
         deleteDocument = obj1.deleteDocument;
@@ -51,7 +51,14 @@ export default function ResourceList({ sample }) {
             </div>
 
             <ul className={styles.transactions}>
-                {sample.map((transaction, idx) => (
+                {sample.filter((transaction) => {
+                    if (ressearch === "") {
+                        return transaction
+                    }
+                    else if (transaction.name.toLowerCase().includes(ressearch.toLowerCase())) {
+                        return transaction;
+                    }
+                }).map((transaction, idx) => (
 
                     <li key={transaction.id}>
 

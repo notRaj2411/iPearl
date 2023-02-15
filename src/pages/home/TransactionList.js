@@ -1,7 +1,12 @@
 import styles from "./Home.module.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useFirestore } from "../../hooks/useFirestore";
+
 
 export default function TransactionList({ transactions }) {
+  const { user } = useAuthContext();
+  const obj1 = useFirestore('transactions')
+  const deleteDocument = obj1.deleteDocument;
   return (
     <>
       <h2 style={{ color: "green" }}>Booked Slots</h2>
@@ -14,6 +19,7 @@ export default function TransactionList({ transactions }) {
               <p className={styles.amount}> {transaction.amount}</p>
             </div>
             <p className="bookedBy">booked by: {transaction.displayName}</p>
+            {user.displayName == transaction.displayName && (<button onClick={() => deleteDocument(transaction.id)}>x</button>)}
           </li>
         ))}
       </ul>

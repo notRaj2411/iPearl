@@ -31,6 +31,12 @@ export const authReducer = (state, action) => {
       return { ...state, invtype: action.payload };
     case "restype":
       return { ...state, restype: action.payload };
+    case "sopsearch":
+      return { ...state, sopsearch: action.payload };
+    case "ressearch":
+      return { ...state, ressearch: action.payload };
+    case "manusers":
+      return { ...state, manusers: action.payload };
     default:
       return state;
   }
@@ -49,7 +55,10 @@ export const AuthContextProvider = ({ children }) => {
     sop: false,
     res: false,
     invtype: 'Refrigerator',
-    restype: 'Chemicals'
+    restype: 'Chemicals',
+    sopsearch: null,
+    ressearch: null,
+    manusers: false
   });
 
   useEffect(() => {

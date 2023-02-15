@@ -21,6 +21,8 @@ export const useLogin = () => {
       dispatch({ type: 'booked', payload: false })
       dispatch({ type: 'bookslot', payload: false })
       dispatch({ type: 'search', payload: false })
+      dispatch({ type: 'sopsearch', payload: false })
+      dispatch({ type: 'ressearch', payload: false })
       dispatch({ type: 'invtype', payload: 'Refrigerator' })
 
       if (!isCancelled) {

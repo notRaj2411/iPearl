@@ -10,38 +10,66 @@ import styles from './Navbar.module.css'
 
 export default function Navbar() {
   const { logout } = useLogout()
-  const { user, res, invtype, restype } = useAuthContext()
+  const { user, res, invtype, restype, manusers } = useAuthContext()
   const { dispatch, sop } = useAuthContext()
   const { booked } = useAuthContext()
   const { inv } = useAuthContext()
-  const { search } = useAuthContext()
+  const { search, sopsearch, ressearch } = useAuthContext()
+
   const [flag, setFlag] = useState(false);
   const [inventory, setInventory] = useState('');
   const [resource, setResource] = useState('');
 
 
   const [searched, setSearched] = useState('')
+  const [sopsearched, setsopsearched] = useState('')
+  const [ressearched, setressearched] = useState('')
   const handleClick = (e) => {
     setInventory(e.target.value)
     dispatch({ type: 'INV', payload: true })
     dispatch({ type: 'search', payload: false })
+    dispatch({ type: 'sopsearch', payload: false })
+    dispatch({ type: 'ressearch', payload: false })
     dispatch({ type: 'sop', payload: false })
     dispatch({ type: 'res', payload: false })
+    dispatch({ type: 'manusers', payload: false })
     dispatch({ type: 'invtype', payload: e.target.value })
+
     console.log(e.target.value);
+    setResource('')
 
     setSearched('')
+    setsopsearched('')
+    setressearched('')
   }
   const handleSearch = () => {
     dispatch({ type: 'search', payload: searched })
-
+    setInventory('');
     console.log(searched)
+  }
+
+  const handleSopSearch = () => {
+    dispatch({ type: 'sopsearch', payload: sopsearched })
+
+    console.log(sopsearch)
+  }
+
+  const handleResSearch = () => {
+    dispatch({ type: 'ressearch', payload: ressearched })
+    // setressearched('')
+    setResource('')
+    console.log(ressearch)
   }
   const handleSop = () => {
     dispatch({ type: 'sop', payload: true })
     dispatch({ type: 'INV', payload: false })
     dispatch({ type: 'search', payload: false })
+    dispatch({ type: 'sopsearch', payload: '' })
+    dispatch({ type: 'ressearch', payload: '' })
     dispatch({ type: 'res', payload: false })
+    dispatch({ type: 'manusers', payload: false })
+    setInventory('')
+    setResource('')
 
 
   }
@@ -49,6 +77,7 @@ export default function Navbar() {
     dispatch({ type: 'sop', payload: false })
     dispatch({ type: 'res', payload: false })
     dispatch({ type: 'inv', payload: true })
+    dispatch({ type: 'manusers', payload: false })
 
 
   }
@@ -59,9 +88,14 @@ export default function Navbar() {
     dispatch({ type: 'booked', payload: false })
     dispatch({ type: 'bookslot', payload: true })
     dispatch({ type: 'search', payload: false })
+    dispatch({ type: 'sopsearch', payload: false })
+    dispatch({ type: 'ressearch', payload: false })
     dispatch({ type: 'sop', payload: false })
     dispatch({ type: 'res', payload: false })
+    dispatch({ type: 'manusers', payload: false })
     setFlag(true);
+    setResource('')
+    setInventory('')
   }
 
   const handleSearchValue = event => {
@@ -70,21 +104,55 @@ export default function Navbar() {
 
   };
 
+  const handleSopSearchValue = event => { ////
+    setsopsearched(event.target.value);
+    console.log(sopsearched)
+
+  };
+
+  const handleResSearchValue = event => { ////
+    setressearched(event.target.value);
+    console.log(ressearched)
+
+  };
+
+
+
   const handleResource = (e) => {
     setResource(e.target.value);
     dispatch({ type: 'res', payload: true })
     dispatch({ type: 'sop', payload: false })
     dispatch({ type: 'INV', payload: false })
     dispatch({ type: 'search', payload: false })
+    dispatch({ type: 'sopsearch', payload: false })
+    dispatch({ type: 'ressearch', payload: '' })
     dispatch({ type: 'restype', payload: e.target.value })
-
+    dispatch({ type: 'manusers', payload: false })
+    setInventory('')
     console.log(restype)
     //console.log(res)
   }
 
+  const manageUsers = (e) => {
+    // setResource(e.target.value);
+    dispatch({ type: 'res', payload: false })
+    dispatch({ type: 'sop', payload: false })
+    dispatch({ type: 'INV', payload: false })
+    dispatch({ type: 'search', payload: false })
+    dispatch({ type: 'sopsearch', payload: false })
+    dispatch({ type: 'ressearch', payload: '' })
+    //dispatch({ type: 'restype', payload: e.target.value })
+    setInventory('')
+    dispatch({ type: 'manusers', payload: true })
+
+  }
+
+
   useEffect(() => {
     setSearched('')
+    setsopsearched('')
     setInventory('')
+    setressearched('')
 
   }, [])
 
@@ -141,10 +209,44 @@ export default function Navbar() {
             )
             }
 
+            {sop && !inv && !res && (<>  <li>
+
+              <input type="text" value={sopsearched} id="simple-search" class="btn1" placeholder="Search       " required onChange={handleSopSearchValue} />
+
+            </li>
+
+              <li>
+                <button className="search" onClick={() => handleSopSearch()}>🔍</button>
+              </li></>
+            )
+            }
+
+            {!sop && !inv && res && (<>  <li>
+
+              <input type="text" value={ressearched} id="simple-search" class="btn1" placeholder="Search       " required onChange={handleResSearchValue} />
+
+            </li>
+
+              <li>
+                <button className="search" onClick={() => handleResSearch()}>🔍</button>
+              </li></>
+            )
+            }
+
+
 
 
             <li>
-              <button className="btn" onClick={() => handleResource()}>Resource</button>
+              <select className="btn1" value={resource} required onChange={handleResource}>
+                <option value="">--Resources--</option>
+                <option value="Chemicals">Chemicals</option>
+                <option value="Antibodies">Antibodies</option>
+                <option value="Inhibitors">Inhibitors</option>
+                <option value="PlasmidsMaps">Plasmids Maps</option>
+                <option value="Others">Others</option>
+
+
+              </select>
             </li>
 
 
@@ -190,6 +292,29 @@ export default function Navbar() {
               </li></>
             )
             }
+            {sop && !inv && !res && (<>  <li>
+
+              <input type="text" value={sopsearched} id="simple-search" class="btn1" placeholder="Search       " required onChange={handleSopSearchValue} />
+
+            </li>
+
+              <li>
+                <button className="search" onClick={() => handleSopSearch()}>🔍</button>
+              </li></>
+            )
+            }
+            {!sop && !inv && res && (<>  <li>
+
+              <input type="text" value={ressearched} id="simple-search" class="btn1" placeholder="Search       " required onChange={handleResSearchValue} />
+
+            </li>
+
+              <li>
+                <button className="search" onClick={() => handleResSearch()}>🔍</button>
+              </li></>
+            )
+            }
+
             {/* <li>
               <button className="btn" onClick={() => handleResource()}>Resource</button>
             </li> */}
@@ -206,6 +331,9 @@ export default function Navbar() {
               </select>
             </li>
 
+            <li>
+              <button className="btn" onClick={() => manageUsers()}>Users</button>
+            </li>
             <li>
               <button className="btn" onClick={logout}>Logout</button>
             </li>
