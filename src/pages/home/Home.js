@@ -17,10 +17,13 @@ import ResourceForm from "./ResourceForm";
 import ResourceList from "./ResourceList";
 import ManageUsers from "./ManageUsers";
 export default function Home() {
-  const { user, inv, inst, time, DATE, search, sop, res, invtype, restype, manusers } = useAuthContext();
+  const { user, inv, inst, time, DATE, search, sop, res, invtype, restype, manusers, bookslot } = useAuthContext();
 
   const obj3 = useCollection("sop");
   const sopdoc = obj3.documents;
+
+  const mu = useCollection('manageusers')
+  const mudoc = mu.documents;
 
   const Chemicals = useCollection("Chemicals");
   const Antibodies = useCollection("Antibodies");
@@ -103,7 +106,7 @@ export default function Home() {
         {/* populates the user transacation list */}
         {error && <p>{error}</p>}
         {!res && !sop && !inst && !inv && user.displayName != "admin" && documents && (
-          <TransactionList sample={documents} />
+          <TransactionList transactions={documents} />
         )}
 
         {!res && !sop && inst && !inv && user.displayName != "admin" && documents && (
@@ -125,8 +128,11 @@ export default function Home() {
         {/* populates the admin sample list */}
         {error2 && <p>{error2}</p>}
 
+        {bookslot && !res && !sop && !inv && user.displayName === "admin" && documents && (
+          <TransactionList transactions={documents} />
+        )}
 
-        {!res && !sop && !search && user.displayName === "admin" && sample && !manusers && (
+        {!res && !sop && !search && inv && !bookslot && user.displayName === "admin" && sample && !manusers && (
           <SampleList sample={sample} />
         )}
         {!res && !sop && search && inv && user.displayName === "admin" && sample && !manusers && (
@@ -140,7 +146,7 @@ export default function Home() {
         )}
 
         {!res && !sop && user.displayName === "admin" && manusers && (
-          <ManageUsers sample={sopdoc} />
+          <ManageUsers sample={mudoc} />
         )}
 
       </div>
@@ -151,8 +157,11 @@ export default function Home() {
         {!res && !sop && !inv && user.displayName != "admin" && (
           <TransactionForm uid={user.uid} displayName={user.displayName} />
         )}
+
+
+
         {/* populates INventory form for admin */}
-        {!res && !sop && user.displayName === "admin" && !manusers && (
+        {!bookslot && !res && !sop && user.displayName === "admin" && !manusers && (
           <Inventoryform uid={user.uid} displayName={user.displayName} />
         )}
         {!res && sop && user.displayName === "admin" && !manusers && (

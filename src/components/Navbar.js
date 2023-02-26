@@ -33,6 +33,7 @@ export default function Navbar() {
     dispatch({ type: 'sop', payload: false })
     dispatch({ type: 'res', payload: false })
     dispatch({ type: 'manusers', payload: false })
+    dispatch({ type: 'bookslot', payload: false })
     dispatch({ type: 'invtype', payload: e.target.value })
 
     console.log(e.target.value);
@@ -68,6 +69,7 @@ export default function Navbar() {
     dispatch({ type: 'ressearch', payload: '' })
     dispatch({ type: 'res', payload: false })
     dispatch({ type: 'manusers', payload: false })
+    dispatch({ type: 'bookslot', payload: false })
     setInventory('')
     setResource('')
 
@@ -93,7 +95,7 @@ export default function Navbar() {
     dispatch({ type: 'sop', payload: false })
     dispatch({ type: 'res', payload: false })
     dispatch({ type: 'manusers', payload: false })
-    setFlag(true);
+    //setFlag(true);
     setResource('')
     setInventory('')
   }
@@ -128,6 +130,7 @@ export default function Navbar() {
     dispatch({ type: 'ressearch', payload: '' })
     dispatch({ type: 'restype', payload: e.target.value })
     dispatch({ type: 'manusers', payload: false })
+    dispatch({ type: 'bookslot', payload: false })
     setInventory('')
     console.log(restype)
     //console.log(res)
@@ -144,6 +147,7 @@ export default function Navbar() {
     //dispatch({ type: 'restype', payload: e.target.value })
     setInventory('')
     dispatch({ type: 'manusers', payload: true })
+    dispatch({ type: 'bookslot', payload: false })
 
   }
 
@@ -267,6 +271,9 @@ export default function Navbar() {
               <button className="btn" onClick={() => handleClick()}>Inventory</button>
 
             </li> */}
+            <li>
+              <button className="btn" onClick={() => handleBookSlotBtn()}> Book Slot</button>
+            </li>
             <li>
               <select className="btn1" value={inventory} required onChange={handleClick}>
                 <option value="">--Inventory--</option>

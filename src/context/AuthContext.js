@@ -37,6 +37,8 @@ export const authReducer = (state, action) => {
       return { ...state, ressearch: action.payload };
     case "manusers":
       return { ...state, manusers: action.payload };
+    case "bookslot":
+      return { ...state, bookslot: action.payload };
     default:
       return state;
   }
@@ -58,7 +60,8 @@ export const AuthContextProvider = ({ children }) => {
     restype: 'Chemicals',
     sopsearch: null,
     ressearch: null,
-    manusers: false
+    manusers: false,
+    bookslot: false
   });
 
   useEffect(() => {

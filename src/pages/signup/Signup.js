@@ -1,20 +1,30 @@
 import { useState } from 'react'
 import { useSignup } from '../../hooks/useSignup'
 import logo from '../../components/logo.png';
+import { useFirestore } from '../../hooks/useFirestore';
+
 
 // styles
 import styles from './Signup.module.css'
 
 export default function Signup() {
+  const { addDocument, response } = useFirestore("manageusers");
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [msg, setmsg] = useState(false)
   const [displayName, setDisplayName] = useState('')
   const { signup, isPending, error } = useSignup()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(email, password, displayName)
-    signup(email, password, displayName)
+    //signup(email, password, displayName)
+    addDocument({
+      displayName,
+      email,
+
+    });
+    setmsg(true);
   }
 
   return (
@@ -31,14 +41,14 @@ export default function Signup() {
             value={email}
           />
         </label>
-        <label>
+        {/* <label>
           <span>Password:</span>
           <input
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-        </label>
+        </label> */}
         <label>
           <span>Username:</span>
           <input
@@ -50,6 +60,7 @@ export default function Signup() {
         {!isPending && <button className="btn">Sign Up</button>}
         {isPending && <button className="btn" disabled>loading</button>}
         {error && <p>{error}</p>}
+        {msg && <p>Registration request is sent to admin</p>}
       </form>
     </>
 

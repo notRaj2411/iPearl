@@ -19,11 +19,12 @@ export const useLogin = () => {
       // dispatch login action
       dispatch({ type: 'LOGIN', payload: res.user })
       dispatch({ type: 'booked', payload: false })
-      dispatch({ type: 'bookslot', payload: false })
+      dispatch({ type: 'bookslot', payload: true })
       dispatch({ type: 'search', payload: false })
       dispatch({ type: 'sopsearch', payload: false })
       dispatch({ type: 'ressearch', payload: false })
-      dispatch({ type: 'invtype', payload: 'Refrigerator' })
+      dispatch({ type: 'invtype', payload: false })
+      // dispatch({ type: 'invtype', payload: false })
 
       if (!isCancelled) {
         setIsPending(false)

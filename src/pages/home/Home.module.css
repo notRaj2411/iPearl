@@ -92,7 +92,7 @@
 
 .transactions .amount {
   margin-left: auto;
-  margin-right: 20px;
+  margin-right: auto;
   color: #777;
   font-weight: bold;
   font-size: 0.7em;
