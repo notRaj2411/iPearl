@@ -86,7 +86,8 @@ export default function TransactionForm({ uid, displayName }) {
 
         <label>
           <span>Date:</span>
-          <input type="date" min={new Date().toISOString().split('T')[0]} required onChange={handleChange3} value={date} />
+          {/* min={new Date().toISOString().split('T')[0]} */}
+          <input type="date" required onChange={handleChange3} value={date} />
         </label>
 
         <label>

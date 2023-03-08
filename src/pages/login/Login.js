@@ -18,9 +18,9 @@ export default function Login() {
 
   return (
     <>
-      <img src={logo} width="300" height="180" style={{ 'margin-left': '600px', 'margin-top': '10px' }} />
+      <img src={logo} width="300" height="180" style={{ 'margin-left': '650px', 'margin-top': '10px' }} />
 
-      <h1 style={{ color: '#1f9751', 'margin-left': '550px' }}>Lab Management System</h1>
+      <h1 style={{ color: '#1f9751', 'margin-left': '550px' }}>iPEARL Management System (IMS)</h1>
       <form onSubmit={handleSubmit} className={styles['login-form']}>
         <h2>Login </h2>
         <label>

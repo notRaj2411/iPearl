@@ -29,8 +29,8 @@ export default function Signup() {
 
   return (
     <>
-      <img src={logo} width="300" height="180" style={{ 'margin-left': '600px' }} />
-      <h1 style={{ color: '#1f9751', 'margin-left': '550px' }}>Lab Management System</h1>
+      <img src={logo} width="300" height="180" style={{ 'margin-left': '650px' }} />
+      <h1 style={{ color: '#1f9751', 'margin-left': '550px' }}>iPEARL Management System (IMS)</h1>
       <form onSubmit={handleSubmit} className={styles['signup-form']}>
         <h2>Sign Up</h2>
         <label>
