@@ -51,8 +51,13 @@ export default function TransactionList({ transactions }) {
             <div className="middle">
               <p className={styles.amount}>{transaction.date}</p>
               <p className={styles.amount}> {transaction.amount}</p>
+
             </div>
-            <p className="bookedBy">booked by: {transaction.displayName}</p>
+            <div className="middle">
+              <p className="bookedBy">booked by: {transaction.displayName}</p>
+              <p className={styles.name}> {transaction.comment}</p>
+            </div>
+
             {((user.displayName == transaction.displayName) || (user.displayName == "admin")) && (<button onClick={() => deleteDocument(transaction.id)}>x</button>)}
 
           </li>

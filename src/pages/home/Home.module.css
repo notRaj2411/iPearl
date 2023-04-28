@@ -80,6 +80,10 @@
   position: relative;
   overflow: hidden;
   border-left: 4px solid #1f9751;
+
+  /* border-right: 4px solid #1f9751; */
+  /* border-top: 4px solid #1f9751;
+  border-bottom: 4px solid #1f9751; */
 }
 
 
@@ -88,6 +92,7 @@
 .transactions .name {
   color: #777;
   font-size: 1em;
+
 }
 
 .transactions .amount {
@@ -95,7 +100,9 @@
   margin-right: auto;
   color: #777;
   font-weight: bold;
+
   font-size: 0.7em;
+
 }
 
 .transactions .approveBtn {

@@ -24,6 +24,7 @@ export const useLogin = () => {
       dispatch({ type: 'sopsearch', payload: false })
       dispatch({ type: 'ressearch', payload: false })
       dispatch({ type: 'invtype', payload: false })
+      dispatch({ type: 'faq', payload: false })
       // dispatch({ type: 'invtype', payload: false })
 
       if (!isCancelled) {

@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useFirestore } from "../../hooks/useFirestore";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import * as XLSX from "xlsx";
 
 export default function Inventoryform({ uid, displayName }) {
   const [name, setName] = useState("");
   const [boxno, setBoxno] = useState("");
   const [slot, setSlot] = useState("");
   const [invt, setInvt] = useState("");
+  const [item, setItem] = useState([])
   const [map, setmap] = useState(new Map());
 
 
@@ -31,6 +33,30 @@ export default function Inventoryform({ uid, displayName }) {
   //const { addDocument2, response2 } = useFirestore("Freezer");
   //const { addDocument3, response3 } = useFirestore("Deep Freezer");
   //const { addDocument4, response4 } = useFirestore("Liquid Nitrogen");
+
+  const readExcel = (file) => {
+    const promise = new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsArrayBuffer(file)
+      fileReader.onload = (e) => {
+        const bufferArray = e.target.result;
+        const wb = XLSX.read(bufferArray, { type: "buffer" });
+        const wsname = wb.SheetNames[0];
+        const ws = wb.Sheets[wsname];
+        const data = XLSX.utils.sheet_to_json(ws)
+        resolve(data)
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      }
+    })
+    promise.then((d) => {
+      console.log(d);
+      setItem(d);
+      console.log(item)
+
+    })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -104,6 +130,54 @@ export default function Inventoryform({ uid, displayName }) {
 
   };
 
+  const handleUpload = () => {
+
+    item.map((it) => {
+      let name = it.Sample
+      let slot = it.Slot
+      let boxno = it.Box
+
+      if (invt === 'Refrigerator') {
+
+        addDocument1({
+          uid,
+          name,
+          boxno,
+          slot,
+        });
+      }
+      else if (invt === 'Freezer') {
+
+        addDocument2({
+          uid,
+          name,
+          boxno,
+          slot,
+        });
+      }
+      else if (invt === 'Deep Freezer') {
+
+        addDocument3({
+          uid,
+          name,
+          boxno,
+          slot,
+        });
+      }
+      else if (invt === 'Liquid Nitrogen') {
+
+        addDocument4({
+          uid,
+          name,
+          boxno,
+          slot,
+        });
+      }
+    })
+
+
+  }
+
   useEffect(() => {
     if (response1.success || response2.success || response3.success || response4.success) {
       setName("");
@@ -162,6 +236,18 @@ export default function Inventoryform({ uid, displayName }) {
           />
         </label>
         {<button>Add</button>}
+        <br />
+        <label >
+          <span>File upload:</span>
+          <input type="file" onChange={(e) => {
+            const file = e.target.files[0];
+
+            readExcel(file)
+          }} />
+        </label>
+        {<button onClick={() => {
+          handleUpload();
+        }}>Upload</button>}
       </form>
     </>
   );

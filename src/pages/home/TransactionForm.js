@@ -6,6 +6,7 @@ export default function TransactionForm({ uid, displayName }) {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
+  const [comment, setComment] = useState("")
 
   const { dispatch } = useAuthContext();
   const { addDocument, response } = useFirestore("transactions");
@@ -20,6 +21,7 @@ export default function TransactionForm({ uid, displayName }) {
       amount,
       displayName,
       date,
+      comment,
     });
 
     dispatch({ type: "inst", payload: "" });
@@ -48,6 +50,7 @@ export default function TransactionForm({ uid, displayName }) {
       setName("");
       setAmount("");
       setDate("");
+      setComment("")
     }
   }, [response.success]);
 
@@ -55,6 +58,7 @@ export default function TransactionForm({ uid, displayName }) {
     setName(inst);
     setAmount(time);
     setDate(DATE);
+
   }, [inst, time, DATE]);
 
   return (
@@ -78,6 +82,7 @@ export default function TransactionForm({ uid, displayName }) {
             <option value="SDS PAGE Equipment">SDS PAGE Equipment</option>
             <option value="Bacterial Centrifuge">Bacterial Centrifuge</option>
             <option value="Common Computer-Scholar's Room">Common Computer-Scholar's Room</option>
+
 
             <option value="IXCM Confocal">IXCM Confocal</option>
 
@@ -104,6 +109,16 @@ export default function TransactionForm({ uid, displayName }) {
             <option value="3:00-4:00 pm">3:00-4:00 pm</option>
             <option value="4:00-5:00 pm">4:00-5:00 pm</option>
           </select>
+        </label>
+
+        <label>
+          <span>Comment:</span>
+          <input
+            type="text"
+            required
+            onChange={(e) => setComment(e.target.value)}
+            value={comment}
+          />
         </label>
 
         {!booked && <button>Book</button>}

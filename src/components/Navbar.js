@@ -14,7 +14,7 @@ export default function Navbar() {
   const { dispatch, sop } = useAuthContext()
   const { booked } = useAuthContext()
   const { inv } = useAuthContext()
-  const { search, sopsearch, ressearch } = useAuthContext()
+  const { search, sopsearch, ressearch, faq } = useAuthContext()
 
   const [flag, setFlag] = useState(false);
   const [inventory, setInventory] = useState('');
@@ -34,6 +34,7 @@ export default function Navbar() {
     dispatch({ type: 'res', payload: false })
     dispatch({ type: 'manusers', payload: false })
     dispatch({ type: 'bookslot', payload: false })
+    dispatch({ type: 'faq', payload: false })
     dispatch({ type: 'invtype', payload: e.target.value })
 
     console.log(e.target.value);
@@ -70,6 +71,7 @@ export default function Navbar() {
     dispatch({ type: 'res', payload: false })
     dispatch({ type: 'manusers', payload: false })
     dispatch({ type: 'bookslot', payload: false })
+    dispatch({ type: 'faq', payload: false })
     setInventory('')
     setResource('')
 
@@ -80,6 +82,7 @@ export default function Navbar() {
     dispatch({ type: 'res', payload: false })
     dispatch({ type: 'inv', payload: true })
     dispatch({ type: 'manusers', payload: false })
+    dispatch({ type: 'faq', payload: false })
 
 
   }
@@ -95,7 +98,26 @@ export default function Navbar() {
     dispatch({ type: 'sop', payload: false })
     dispatch({ type: 'res', payload: false })
     dispatch({ type: 'manusers', payload: false })
-    //setFlag(true);
+    dispatch({ type: 'faq', payload: false })
+
+    setResource('')
+    setInventory('')
+  }
+
+  const handleFaq = () => {
+    dispatch({ type: 'faq', payload: true })
+    dispatch({ type: 'INV', payload: false })
+    dispatch({ type: 'inst', payload: "" })
+    dispatch({ type: 'time', payload: "" })
+    dispatch({ type: 'booked', payload: false })
+    dispatch({ type: 'bookslot', payload: false })
+    dispatch({ type: 'search', payload: false })
+    dispatch({ type: 'sopsearch', payload: false })
+    dispatch({ type: 'ressearch', payload: false })
+    dispatch({ type: 'sop', payload: false })
+    dispatch({ type: 'res', payload: false })
+    dispatch({ type: 'manusers', payload: false })
+
     setResource('')
     setInventory('')
   }
@@ -117,6 +139,8 @@ export default function Navbar() {
     console.log(ressearched)
 
   };
+
+
 
 
 
@@ -163,9 +187,9 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <ul>
-        <li>
+        {/* <li>
           <img src={logo} width="100" height="60" style={{ 'margin-right': '40px' }} />
-        </li>
+        </li> */}
 
         {!user && (
           <>
@@ -253,7 +277,9 @@ export default function Navbar() {
               </select>
             </li>
 
-
+            <li>
+              <button className="btn" onClick={() => handleFaq()}>FAQ</button>
+            </li>
 
             <li>
               <button className="btn" onClick={logout}>Logout</button>

@@ -39,6 +39,8 @@ export const authReducer = (state, action) => {
       return { ...state, manusers: action.payload };
     case "bookslot":
       return { ...state, bookslot: action.payload };
+    case "faq":
+      return { ...state, faq: action.payload };
     default:
       return state;
   }
@@ -61,7 +63,8 @@ export const AuthContextProvider = ({ children }) => {
     sopsearch: null,
     ressearch: null,
     manusers: false,
-    bookslot: false
+    bookslot: false,
+    faq: false
   });
 
   useEffect(() => {

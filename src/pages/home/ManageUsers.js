@@ -35,17 +35,16 @@ export default function ManageUsers({ sample }) {
                     <>
                         <li key={transaction.id}>
                             <span className={styles.spacing} >{idx + 1 + '.'}</span>
-                            {/* {ans = (hyperlink.link({ transaction.url }))} */}
+
                             <p className={styles.name}> {transaction.displayName}</p>
-                            {/* <p className={styles.amount}>{ans.link(transaction.url)}</p> */}
+
                             <p className={styles.amount}> {transaction.email}</p>
-                            {/* <a className={styles.amount} href={transaction.url}>{transaction.name}</a> */}
+
                             <br />
                             <button className={styles.approveBtn} onClick={() => { handleApprove(transaction.displayName, transaction.email, transaction.id) }}>Approve</button>
                             <button className={styles.approveBtn} onClick={() => deleteDocument(transaction.id)}>Decline</button>
                         </li>
-                        {/* <button className={styles.approveBtn} onClick={() => { handleApprove(transaction.displayName, transaction.email, transaction.idx) }}>Approve</button>
-                        <button className={styles.approveBtn}>Decline</button> */}
+
                     </>
 
                 ))}

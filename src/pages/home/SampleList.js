@@ -35,8 +35,8 @@ export default function SampleList({ sample }) {
       <br />
       <div className="title">
         <h4>Box</h4>
-        <h4>Slot</h4>
-        <h4>Sample</h4>
+        <h4 style={{ marginLeft: '60px' }}>Slot</h4>
+        <h4 style={{ marginRight: '50px' }}>Sample</h4>
       </div>
 
       <ul className={styles.transactions}>

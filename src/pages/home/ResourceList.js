@@ -46,7 +46,7 @@ export default function ResourceList({ sample }) {
 
 
 
-                <h4>Link</h4>
+                <h4 style={{ marginRight: '210px' }}>Link</h4>
 
             </div>
 

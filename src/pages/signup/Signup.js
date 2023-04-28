@@ -29,19 +29,20 @@ export default function Signup() {
 
   return (
     <>
-      <img src={logo} width="300" height="180" style={{ 'margin-left': '650px' }} />
-      <h1 style={{ color: '#1f9751', 'margin-left': '550px' }}>iPEARL Management System (IMS)</h1>
-      <form onSubmit={handleSubmit} className={styles['signup-form']}>
-        <h2>Sign Up</h2>
-        <label>
-          <span>Email:</span>
-          <input
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-        </label>
-        {/* <label>
+      <div style={{ background: 'repeating-linear-gradient(135deg, beige, transparent 1400px)' }} >
+        <img src={logo} width="300" height="180" style={{ 'margin-left': '650px' }} />
+        <h1 style={{ color: '#1f9751', 'margin-left': '550px' }}>iPEARL Management System (IMS)</h1>
+        <form onSubmit={handleSubmit} className={styles['signup-form']}>
+          <h2>Sign Up</h2>
+          <label>
+            <span>Email:</span>
+            <input
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </label>
+          {/* <label>
           <span>Password:</span>
           <input
             type="password"
@@ -49,19 +50,20 @@ export default function Signup() {
             value={password}
           />
         </label> */}
-        <label>
-          <span>Username:</span>
-          <input
-            type="text"
-            onChange={(e) => setDisplayName(e.target.value)}
-            value={displayName}
-          />
-        </label>
-        {!isPending && <button className="btn">Sign Up</button>}
-        {isPending && <button className="btn" disabled>loading</button>}
-        {error && <p>{error}</p>}
-        {msg && <p>Registration request is sent to admin</p>}
-      </form>
+          <label>
+            <span>Username:</span>
+            <input
+              type="text"
+              onChange={(e) => setDisplayName(e.target.value)}
+              value={displayName}
+            />
+          </label>
+          {!isPending && <button className="btn">Sign Up</button>}
+          {isPending && <button className="btn" disabled>loading</button>}
+          {error && <p>{error}</p>}
+          {msg && <p>Registration request is sent to admin</p>}
+        </form>
+      </div>
     </>
 
   )

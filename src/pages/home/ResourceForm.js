@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useFirestore } from "../../hooks/useFirestore";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import * as XLSX from "xlsx";
 
 export default function ResourceForm({ uid, displayName }) {
     const [name, setName] = useState("");
     const [rest, setRest] = useState("");
+    const [item, setItem] = useState([])
 
     const [map, setmap] = useState(new Map());
     const [url, setUrl] = useState('');
@@ -37,6 +39,30 @@ export default function ResourceForm({ uid, displayName }) {
         dispatch({ type: 'restype', payload: event.target.value })
         console.log(event.target.value)
     };
+
+    const readExcel = (file) => {
+        const promise = new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsArrayBuffer(file)
+            fileReader.onload = (e) => {
+                const bufferArray = e.target.result;
+                const wb = XLSX.read(bufferArray, { type: "buffer" });
+                const wsname = wb.SheetNames[0];
+                const ws = wb.Sheets[wsname];
+                const data = XLSX.utils.sheet_to_json(ws)
+                resolve(data)
+            };
+            fileReader.onerror = (error) => {
+                reject(error);
+            }
+        })
+        promise.then((d) => {
+            console.log(d);
+            setItem(d);
+            console.log(item)
+
+        })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -76,6 +102,48 @@ export default function ResourceForm({ uid, displayName }) {
 
         console.log(rest);
     };
+
+    const handleUpload = () => {
+
+        item.map((it) => {
+            let name = it.Name
+            let url = it.Url
+
+            if (rest === 'Chemicals') {
+                addDocument1({
+                    name,
+                    url
+                });
+            }
+            else if (rest === 'Antibodies') {
+                addDocument2({
+                    name,
+                    url
+                });
+            }
+            else if (rest === 'Inhibitors') {
+                addDocument3({
+                    name,
+                    url
+                });
+            }
+            else if (rest === 'PlasmidsMaps') {
+                addDocument4({
+                    name,
+                    url
+                });
+            }
+            else if (rest === 'Others') {
+                addDocument5({
+                    name,
+                    url
+                });
+            }
+
+        })
+
+
+    }
 
 
 
@@ -126,6 +194,19 @@ export default function ResourceForm({ uid, displayName }) {
                 </label>
 
                 {<button>Add Resource</button>}
+
+                <br />
+                <label >
+                    <span>File upload:</span>
+                    <input type="file" onChange={(e) => {
+                        const file = e.target.files[0];
+
+                        readExcel(file)
+                    }} />
+                </label>
+                {<button onClick={() => {
+                    handleUpload();
+                }}>Upload</button>}
             </form>
         </>
     );

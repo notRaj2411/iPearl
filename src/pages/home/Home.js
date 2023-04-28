@@ -16,8 +16,9 @@ import SopForm from "./SopForm";
 import ResourceForm from "./ResourceForm";
 import ResourceList from "./ResourceList";
 import ManageUsers from "./ManageUsers";
+import Faq from "./Faq";
 export default function Home() {
-  const { user, inv, inst, time, DATE, search, sop, res, invtype, restype, manusers, bookslot } = useAuthContext();
+  const { user, inv, inst, time, DATE, search, sop, res, invtype, restype, manusers, bookslot, faq } = useAuthContext();
 
   const obj3 = useCollection("sop");
   const sopdoc = obj3.documents;
@@ -101,76 +102,83 @@ export default function Home() {
 
 
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        {/* populates the user transacation list */}
-        {error && <p>{error}</p>}
-        {!res && !sop && !inst && !inv && user.displayName != "admin" && documents && (
-          <TransactionList transactions={documents} />
-        )}
+    <div style={{ background: 'repeating-linear-gradient(135deg, beige, transparent 1400px)' }} >
+      <div className={styles.container}>
+        <div className={styles.content}>
+          {/* populates the user transacation list */}
+          {error && <p>{error}</p>}
+          {!res && !sop && !inst && !faq && !inv && user.displayName != "admin" && documents && (
+            <TransactionList transactions={documents} />
+          )}
 
-        {!res && !sop && inst && !inv && user.displayName != "admin" && documents && (
-          <TransactionListFiltered temp={inst} clock={time} date={DATE} />
-        )}
-        {!res && !sop && !search && inv && user.displayName != "admin" && sample && (
-          <SampleList sample={sample} />
-        )}
-        {!res && !sop && search && inv && user.displayName != "admin" && sample && (
-          <SampleListFiltered sample={sample} search={search} />
-        )}
-        {!res && sop && user.displayName != "admin" && sopdoc && (
-          <SopList sample={sopdoc} />
-        )}
-        {res && !sop && user.displayName != "admin" && sopdoc && (
-          <ResourceList sample={resdoc} />
-        )}
+          {!res && !sop && inst && !faq && !inv && user.displayName != "admin" && documents && (
+            <TransactionListFiltered temp={inst} clock={time} date={DATE} />
+          )}
+          {!res && !sop && !faq && !search && inv && user.displayName != "admin" && sample && (
+            <SampleList sample={sample} />
+          )}
+          {!res && !sop && search && inv && user.displayName != "admin" && sample && (
+            <SampleListFiltered sample={sample} search={search} />
+          )}
+          {!res && sop && !faq && user.displayName != "admin" && sopdoc && (
+            <SopList sample={sopdoc} />
+          )}
 
-        {/* populates the admin sample list */}
-        {error2 && <p>{error2}</p>}
+          {!res && !sop && faq && user.displayName != "admin" && sopdoc && (
+            <Faq sample={sopdoc} />
+          )}
 
-        {bookslot && !res && !sop && !inv && user.displayName === "admin" && documents && (
-          <TransactionList transactions={documents} />
-        )}
+          {res && !sop && !faq && user.displayName != "admin" && sopdoc && (
+            <ResourceList sample={resdoc} />
+          )}
 
-        {!res && !sop && !search && inv && !bookslot && user.displayName === "admin" && sample && !manusers && (
-          <SampleList sample={sample} />
-        )}
-        {!res && !sop && search && inv && user.displayName === "admin" && sample && !manusers && (
-          <SampleListFiltered sample={sample} search={search} />
-        )}
-        {!res && sop && user.displayName === "admin" && sopdoc && !manusers && (
-          <SopList sample={sopdoc} />
-        )}
-        {res && !sop && user.displayName === "admin" && sopdoc && !manusers && (
-          <ResourceList sample={resdoc} />
-        )}
+          {/* populates the admin sample list */}
+          {error2 && <p>{error2}</p>}
 
-        {!res && !sop && user.displayName === "admin" && manusers && (
-          <ManageUsers sample={mudoc} />
-        )}
+          {bookslot && !res && !sop && !inv && user.displayName === "admin" && documents && (
+            <TransactionList transactions={documents} />
+          )}
 
-      </div>
+          {!res && !sop && !search && inv && !bookslot && user.displayName === "admin" && sample && !manusers && (
+            <SampleList sample={sample} />
+          )}
+          {!res && !sop && search && inv && user.displayName === "admin" && sample && !manusers && (
+            <SampleListFiltered sample={sample} search={search} />
+          )}
+          {!res && sop && user.displayName === "admin" && sopdoc && !manusers && (
+            <SopList sample={sopdoc} />
+          )}
+          {res && !sop && user.displayName === "admin" && sopdoc && !manusers && (
+            <ResourceList sample={resdoc} />
+          )}
 
-      <div className={styles.sidebar}>
-        {/* populates sidebar */}
-        {/* populates Transaction form for normal user */}
-        {!res && !sop && !inv && user.displayName != "admin" && (
-          <TransactionForm uid={user.uid} displayName={user.displayName} />
-        )}
+          {!res && !sop && user.displayName === "admin" && manusers && (
+            <ManageUsers sample={mudoc} />
+          )}
+
+        </div>
+
+        <div className={styles.sidebar}>
+          {/* populates sidebar */}
+          {/* populates Transaction form for normal user */}
+          {!res && !faq && !sop && !inv && user.displayName != "admin" && (
+            <TransactionForm uid={user.uid} displayName={user.displayName} />
+          )}
 
 
 
-        {/* populates INventory form for admin */}
-        {!bookslot && !res && !sop && user.displayName === "admin" && !manusers && (
-          <Inventoryform uid={user.uid} displayName={user.displayName} />
-        )}
-        {!res && sop && user.displayName === "admin" && !manusers && (
-          <SopForm uid={user.uid} displayName={user.displayName} />
-        )}
-        {res && !sop && user.displayName === "admin" && !manusers && (
-          <ResourceForm uid={user.uid} displayName={user.displayName} />
-        )}
+          {/* populates INventory form for admin */}
+          {!bookslot && !res && !sop && user.displayName === "admin" && !manusers && (
+            <Inventoryform uid={user.uid} displayName={user.displayName} />
+          )}
+          {!res && sop && user.displayName === "admin" && !manusers && (
+            <SopForm uid={user.uid} displayName={user.displayName} />
+          )}
+          {res && !sop && user.displayName === "admin" && !manusers && (
+            <ResourceForm uid={user.uid} displayName={user.displayName} />
+          )}
 
+        </div>
       </div>
     </div>
   );
